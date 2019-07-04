@@ -49,6 +49,8 @@ namespace TodoApi.Controllers
         }
 
         // POST: api/Todo
+        [ProducesResponseType(201)]     // Created
+        [ProducesResponseType(400)]     // BadRequest
         [HttpPost]
         public async Task<ActionResult<TodoItem>> PostTodoItem(TodoItem item)
         {
