@@ -20,16 +20,18 @@ namespace TodoApi
 
         public async Task InvokeAsync(HttpContext context)
         {
+            var guid = Guid.NewGuid();
+
             if (_options.DisplayBefore)
             {
-                await context.Response.WriteAsync("------- Before ------ \n\r");
+                await context.Response.WriteAsync($"------- Before ------ [{ guid }] \n\r");
             }
 
             await _next(context);
 
             if (_options.DisplayAfter)
             {
-                await context.Response.WriteAsync("\n\r------- After ------");
+                await context.Response.WriteAsync($"\n\r------- After ------ [{ guid }] ");
             }
         }
     }
