@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using TodoApi.Extensions;
 using TodoApi.Models;
 
 namespace TodoApi
@@ -27,6 +29,7 @@ namespace TodoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<TodoContext>(opt =>
                 opt.UseInMemoryDatabase("TodoList"));
@@ -65,6 +68,23 @@ namespace TodoApi
             {
                 app.UseHsts();
             }
+
+            app.UseMyCustomMiddleware();
+
+
+            //app.Use(async (context, next) =>
+            //{
+            //    await context.Response.WriteAsync("------- Before ------ \n\r");
+
+            //    await next();
+
+            //    await context.Response.WriteAsync("\n\r------- After ------");
+            //});
+
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Hello World!");
+            });
 
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
