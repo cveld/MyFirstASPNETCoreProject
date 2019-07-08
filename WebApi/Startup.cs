@@ -56,6 +56,8 @@ namespace TodoApi
                 };
             });
             // services.AddMyCustomMiddlewareWithOptions(options => options.DisplayAfter = false);
+            services.AddSimpleCacheMiddleware(options => options.UrlList = new HashSet<string> { "/api/todo" });
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,8 +72,10 @@ namespace TodoApi
                 app.UseHsts();
             }
 
-            app.UseMyCustomMiddlewareWithOptionsMultiUse(new MyCustomMiddlewareOptions { DisplayBefore = false });
-            app.UseMyCustomMiddlewareWithOptionsMultiUse(new MyCustomMiddlewareOptions { DisplayAfter = false });
+            app.UseSimpleCacheMiddleware();
+
+            // app.UseMyCustomMiddlewareWithOptionsMultiUse(new MyCustomMiddlewareOptions { DisplayBefore = false });
+            // app.UseMyCustomMiddlewareWithOptionsMultiUse(new MyCustomMiddlewareOptions { DisplayAfter = false });
 
             // app.UseMyCustomMiddlewareWithOptions();
             // app.UseMyCustomMiddleware();
