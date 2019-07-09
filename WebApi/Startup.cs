@@ -90,10 +90,10 @@ namespace TodoApi
             //    await context.Response.WriteAsync("\n\r------- After ------");
             //});
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+            //app.Run(async (context) =>
+            //{
+            //    await context.Response.WriteAsync("Hello World!");
+            //});
 
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
