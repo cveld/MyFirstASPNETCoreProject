@@ -57,7 +57,8 @@ namespace TodoApi
             });
             // services.AddMyCustomMiddlewareWithOptions(options => options.DisplayAfter = false);
             services.AddSimpleCacheMiddleware(options => options.UrlList = new HashSet<string> { "/api/todo" });
-            
+
+            services.AddTruckRepository();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
